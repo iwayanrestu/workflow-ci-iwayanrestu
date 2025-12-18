@@ -1,7 +1,5 @@
 name: credit-card-clustering
-
 conda_env: conda.yaml
-
 entry_points:
   main:
     command: "python Modelling.py"

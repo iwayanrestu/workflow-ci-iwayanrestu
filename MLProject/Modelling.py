@@ -5,12 +5,10 @@ import mlflow.sklearn
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
-# Load data preprocessing
-df = pd.read_csv('credit_card_scaled.csv')
-
+# Load data (RELATIVE PATH)
+df = pd.read_csv("credit_card_scaled.csv")
 X = df.values
 
-mlflow.set_tracking_uri("file:./mlruns")
 mlflow.set_experiment("Credit Card Clustering")
 
 with mlflow.start_run():
@@ -22,5 +20,5 @@ with mlflow.start_run():
     labels = kmeans.labels_
     silhouette = silhouette_score(X, labels)
 
+    mlflow.log_metric("silhouette_score", silhouette)
     print("Silhouette Score:", silhouette)
-

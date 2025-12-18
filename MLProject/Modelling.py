@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
 # Load data preprocessing
-df = pd.read_csv('Membangun_model/creditcard_preprocessing/credit_card_scaled.csv')
+df = pd.read_csv('credit_card_scaled.csv')
 
 X = df.values
 
@@ -23,3 +23,4 @@ with mlflow.start_run():
     silhouette = silhouette_score(X, labels)
 
     print("Silhouette Score:", silhouette)
+

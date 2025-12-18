@@ -8,6 +8,10 @@ jobs:
   train:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        shell: bash -l {0}   
+
     steps:
     - uses: actions/checkout@v4
 
@@ -16,6 +20,7 @@ jobs:
       with:
         auto-update-conda: true
         python-version: 3.12
+        activate-environment: base
 
     - name: Install MLflow
       run: pip install mlflow

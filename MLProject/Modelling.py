@@ -10,13 +10,18 @@ df = pd.read_csv("credit_card_scaled.csv")
 X = df.values
 
 mlflow.set_experiment("Credit Card Clustering")
-mlflow.sklearn.autolog()
 
-kmeans = KMeans(n_clusters=4, random_state=42)
-kmeans.fit(X)
+with mlflow.start_run(nested=True):
+    kmeans = KMeans(n_clusters=4, random_state=42)
+    kmeans.fit(X)
 
-labels = kmeans.labels_
-silhouette = silhouette_score(X, labels)
+    labels = kmeans.labels_
+    silhouette = silhouette_score(X, labels)
 
-mlflow.log_metric("silhouette_score", silhouette)
+    mlflow.log_param("n_clusters", 4)
+    mlflow.log_metric("silhouette_score", silhouette)
+    mlflow.sklearn.log_model(kmeans, "model")
+
 print("Silhouette Score:", silhouette)
+
+

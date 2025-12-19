@@ -17,10 +17,12 @@ jobs:
     - name: Run actions/checkout@v3
       uses: actions/checkout@v3
 
-    # Set up Python 3.12.7
-    - name: Set up Python 3.12.7
-      uses: actions/setup-python@v5
+    # Set up Miniconda (DITAMBAHKAN)
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v3
       with:
+        auto-update-conda: false
+        auto-activate-base: true
         python-version: "3.12.7"
 
     # Check Env
@@ -28,6 +30,8 @@ jobs:
       run: |
         echo "Python version:"
         python --version
+        echo "Conda info:"
+        conda info
         echo "Pip version:"
         pip --version
         echo "Current directory:"

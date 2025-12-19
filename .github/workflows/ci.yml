@@ -46,7 +46,7 @@ jobs:
     # Run mlflow project
     - name: Run mlflow project
       run: |
-        mlflow run .
+        mlflow run MLProject
 
     # Get latest MLflow run_id
     - name: Get latest MLflow run_id

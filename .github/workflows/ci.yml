@@ -46,6 +46,10 @@ jobs:
         if [ -f requirements.txt ]; then
           pip install -r requirements.txt
         fi
+    - name: Set MLflow tracking uri
+      run: |
+        export MLFLOW_TRACKING_URI=file://$GITHUB_WORKSPACE/mlruns
+        echo "MLFLOW_TRACKING_URI=$MLFLOW_TRACKING_URI"
 
     # Run mlflow project
     - name: Run mlflow project
@@ -56,4 +60,4 @@ jobs:
     - name: Get latest MLflow run_id
       run: |
         echo "Latest MLflow run_id:"
-        ls -td mlruns/*/* | head -n 1 | awk -F'/' '{print $(NF-1)}'
+        find mlruns -type d -mindepth 2 -maxdepth 2 | sort | tail -n 1 | awk -F'/' '{print $(NF)}'
